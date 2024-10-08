@@ -16,7 +16,7 @@ def main(argv):
         code, rc = read_file(argv[1])
 
     if 1 == rc:
-        message = f'File: {file_name} not found'
+        message = f'File: "{file_name}" not found'
     elif 2 == rc:
         message = 'Invalid extension'
 
