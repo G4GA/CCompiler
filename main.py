@@ -2,19 +2,27 @@ import sys
 from os.path import isfile
 
 from parser import Parser
+
+from GUI import CompWindow
+
 READ_MODE = "r"
 
 def main(argv):
-    code, rc = read_file(argv[1])
-    file_name = argv[1].split("/").pop()
+    code, rc = '', 1
+    file_name = ''
+    message = ''
+    if len(argv) == 2:
+        file_name = argv[1].split("/").pop()
+        code, rc = read_file(argv[1])
 
-    if not rc:
-        parser = Parser(code)
-        print(parser.parse())
-    elif rc == 1:
-        print(f'File: "{file_name}" not found')
-    elif rc == 2:
-        print(f'File extension "{file_name.split(".").pop()}" not correct')
+    if 1 == rc:
+        message = f'File: {file_name} not found'
+    elif 2 == rc:
+        message = 'Invalid extension'
+
+    window = CompWindow(message)
+    window.start_window()
+
 
 
 def read_file(file_path) -> tuple:
