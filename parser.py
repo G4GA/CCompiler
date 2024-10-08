@@ -12,6 +12,20 @@ Separadores (delimitadores, como paréntesis, llaves, comas, punto y coma)
 Comentarios
 """
 
+from enum import Enum
+
+LEX_DELIMITERS = ('(', ')',
+                  '{', '}',
+                  '[', ']',
+                  ';', ',',
+                  '.', ':')
+LEX_OPERATOR = (
+    '+', '-', '*', '/', '%',
+    '=', '>', '<', '!',
+    '&', '|', '^', '~'
+)
+
+
 class TokenType(Enum):
     ID = 1,
     KEYWORD = 2,
@@ -19,11 +33,11 @@ class TokenType(Enum):
     OPERATOR = 4,
     DELIMITER = 5,
 
-class Token():
-    def __init__(self, word)
+class Token:
+    def __init__(self, word):
         self._components = {
             'type': TokenType,
-            'lexeme': str,
+            'lexeme': '',
         }
         self.tokenize(word)
 
@@ -36,8 +50,14 @@ class Token():
         return self._components['lexeme']
 
     def tokenize(self, word: str) -> str:
+        lexeme= word[0]
+        word = word[1:]
+        if lexeme in LEX_DELIMITERS:
+            self._components['lexeme'] = lexeme
+            self._components['type'] = TokenType.DELIMITER
+        elif lexeme in LEX_OPERATOR:
+            pass
         return ''
-
 
 class Parser():
     def __init__(self, code_str):
