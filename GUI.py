@@ -7,16 +7,17 @@ from tkinter.scrolledtext import ScrolledText
 from tkinter import ttk
 
 class CompWindow:
-    def __init__(self, message):
+    def __init__(self, message, file_str=''):
         self._components = {
-            'root': tk.Tk()
+            'root': tk.Tk(),
         }
-        self.init_window(message)
+        self.init_window(message, file_str)
 
-    def init_window(self, message):
+    def init_window(self, message, initial_code):
         print(message)
         self.root.title("Compilador")
         self._components['text_edit'] = ScrolledText(self.root, width=60, height=20)
+        self._components['text_edit'].insert('1.0', initial_code)
         self._components['lex'] = tk.Button(self.root, text='Get tokens')
         self._components['parse'] = tk.Button(self.root, text='Parse Code')
 

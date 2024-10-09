@@ -20,7 +20,7 @@ def main(argv):
     elif 2 == rc:
         message = 'Invalid extension'
 
-    window = CompWindow(message)
+    window = CompWindow(message, code)
     window.start_window()
 
 
